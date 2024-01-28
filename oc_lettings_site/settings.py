@@ -1,6 +1,18 @@
 import os
 
 from pathlib import Path
+import sentry_sdk
+
+sentry_sdk.init(
+    dsn="https://a70f13cf24e3d0bed0cf563c5821f2ea@o4506495789563904.ingest.sentry.io/4506649166020608",
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    profiles_sample_rate=1.0,
+)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "oc_lettings_site.apps.OCLettingsSiteConfig",
+    
+    "oc_lettings_site",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -30,6 +43,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "profiles",
     "lettings",
+    
+    
 ]
 
 MIDDLEWARE = [

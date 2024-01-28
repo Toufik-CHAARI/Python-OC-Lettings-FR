@@ -1,4 +1,4 @@
-#!/Users/chaaritoufik/Desktop/dev/OPENCLASSROOM/PROJET13/Python-OC-Lettings-FR/env/bin/python3.11
+#!/Users/chaaritoufik/Desktop/dev/OPENCLASSROOM/PROJET13/Python-OC-Lettings-FR/env/bin/python3.10
 from django.core import management
 
 if __name__ == "__main__":
