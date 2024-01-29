@@ -4,7 +4,10 @@ from pathlib import Path
 import sentry_sdk
 
 sentry_sdk.init(
-    dsn="https://a70f13cf24e3d0bed0cf563c5821f2ea@o4506495789563904.ingest.sentry.io/4506649166020608",
+    dsn=(
+        "https://a70f13cf24e3d0bed0cf563c5821f2ea@o4506495789563904"
+        ".ingest.sentry.io/4506649166020608"
+    ),
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.
     traces_sample_rate=1.0,
@@ -33,7 +36,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    
     "oc_lettings_site",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -43,8 +45,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "profiles",
     "lettings",
-    
-    
 ]
 
 MIDDLEWARE = [

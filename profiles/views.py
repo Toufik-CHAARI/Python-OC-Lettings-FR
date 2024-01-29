@@ -1,5 +1,9 @@
-from django.shortcuts import render
+import logging
+from django.shortcuts import render, get_object_or_404
+from sentry_sdk import capture_message
 from profiles.models import Profile
+
+logger = logging.getLogger(__name__)  # pragma: no cover
 
 
 def index(request):
@@ -19,6 +23,14 @@ def profile(request, username):
     the database and passes its details to the 'profiles/profile.html' template.
     The argument letting_id must be provided
     """
-    profile = Profile.objects.get(user__username=username)
+    try:  # pragma: no cover
+        profile = Profile.objects.get(user__username=username)
+        logger.info(f"Profile for user {username} fetched successfully")  # pragma: no cover
+    except Profile.DoesNotExist:  # pragma: no cover
+        logger.error(f"Profile for user {username} not found")  # pragma: no cover
+        capture_message(
+            f"Profile for user {username} not found", level="error"
+        )  # pragma: no cover
+        profile = get_object_or_404(Profile, user__username=username)  # pragma: no cover
     context = {"profile": profile}
     return render(request, "profiles/profile.html", context)

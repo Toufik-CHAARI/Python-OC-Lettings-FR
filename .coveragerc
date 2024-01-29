@@ -1,4 +1,18 @@
 [run]
-omit =
+omit = 
+    */oc_lettings_site/*
     */tests/*
+    */test_*.py
+    *_test.py
+    */env/*
+
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    if self\.debug:
+    raise AssertionError
+    raise NotImplementedError
+    if 0:
+    if __name__ == .__main__.:
+    
     
