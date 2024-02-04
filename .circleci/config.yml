@@ -78,3 +78,6 @@ workflows:
   build:
     jobs:
       - build-and-test
+      - build-and-push-docker:
+          requires:
+            - build-and-test

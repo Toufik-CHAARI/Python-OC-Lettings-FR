@@ -1,19 +1,17 @@
 # Use an official Python runtime as a parent image
-FROM python:3.8-slim
+FROM python:3.10
 
-# Set environment varibles
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-# Set work directory
+# Set the working directory in the container
 WORKDIR /code
 
-# Install dependencies
-COPY Pipfile Pipfile.lock /code/
-RUN pip install pipenv && pipenv install --system
-
-# Copy project
+# Copy the current directory contents into the container at /code
 COPY . /code/
 
-# Command to run the server
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Make port 8000 available to the world outside this container
+EXPOSE 8000
+
+# Define command to run the application
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
