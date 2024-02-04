@@ -37,7 +37,7 @@ jobs:
           name: Run pytest with coverage
           command: |
             . venv/bin/activate
-            pytest --cov=your_app_name --cov-report=term --cov-fail-under=80
+            pytest --cov=profiles --cov=oc_lettings_site --cov-report=term --cov-fail-under=80
 
 workflows:
   version: 2
