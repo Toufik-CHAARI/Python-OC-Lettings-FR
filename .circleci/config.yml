@@ -2,6 +2,26 @@
 
 version: 2.1
 
+commands:
+  setup_docker_environment:
+    description: "Setup Docker Environment"
+    steps:
+      - run:
+          name: Install Docker client
+          command: |
+            sudo apt-get update
+            sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - run:
+          name: Build and Push Docker Image
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker build -t $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1} .
+            docker push $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1}
+
 jobs:
   build-and-test:
     docker:
@@ -38,6 +58,20 @@ jobs:
           command: |
             . venv/bin/activate
             pytest --cov=profiles --cov=lettings --cov-report=term --cov-fail-under=80
+
+  build-and-push-docker:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - setup_docker_environment
+      - run:
+          name: Build and Push Docker Image
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker build -t $DOCKERHUB_USERNAME/myapp:${CIRCLE_SHA1} .
+            docker push $DOCKERHUB_USERNAME/myapp:${CIRCLE_SHA1}
+
 
 workflows:
   version: 2
