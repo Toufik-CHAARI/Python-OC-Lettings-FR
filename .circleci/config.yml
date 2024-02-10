@@ -71,13 +71,49 @@ jobs:
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker build -t $DOCKERHUB_USERNAME/myapp:${CIRCLE_SHA1} .
             docker push $DOCKERHUB_USERNAME/myapp:${CIRCLE_SHA1}
+  deploy-to-heroku:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: Install Heroku CLI
+          command: |
+            curl https://cli-assets.heroku.com/install.sh | sh
+      - run:
+          name: Heroku Login
+          command: |
+            echo "$HEROKU_API_KEY" | heroku auth:token
+      - run:
+          name: Login to Container Registry
+          command: |
+            echo "$HEROKU_API_KEY" | docker login --username=_ --password-stdin registry.heroku.com
+      - run:
+          name: Push Docker Image to Heroku Container Registry
+          command: |
+            docker build -t $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1} .
+            docker push $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1}
+      - run:
+          name: Release the Image
+          command: |
+            heroku container:release web --app $HEROKU_APP_NAME
+
 
 
 workflows:
   version: 2
-  build:
+  build-deploy:
     jobs:
-      - build-and-test
+      - build-and-test          
       - build-and-push-docker:
           requires:
             - build-and-test
+          filters:
+            branches:
+              only: master  # Only run on master branch
+      - deploy-to-heroku:
+          requires:
+            - build-and-push-docker
+          filters:
+            branches:
+              only: master  # Only run on master branch
