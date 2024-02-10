@@ -71,8 +71,8 @@ jobs:
           name: Build and Push Docker Image
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker build -t $DOCKERHUB_USERNAME/myapp:${CIRCLE_SHA1} .
-            docker push $DOCKERHUB_USERNAME/myapp:${CIRCLE_SHA1}
+            docker build -t $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1} .
+            docker push $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1}
   deploy-to-heroku:
     docker:
       - image: cimg/base:stable
