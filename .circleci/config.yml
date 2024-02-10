@@ -64,7 +64,9 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - setup_docker_environment
+      - setup_remote_docker:   
+        version: 20.10.6   
+        docker_layer_caching: true   
       - run:
           name: Build and Push Docker Image
           command: |
