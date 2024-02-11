@@ -7,7 +7,11 @@ WORKDIR /code
 # Install any needed packages specified in requirements.txt
 # Copy requirements.txt first to leverage Docker cache
 COPY requirements.txt /code/
-RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+# Upgrade pip
+RUN pip install --upgrade pip
+# Install packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
 
 
 # Copy the current directory contents into the container at /code
@@ -21,3 +25,4 @@ EXPOSE 8000
 
 # Define command to run the application
 CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
+#CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:${PORT:-8000}
