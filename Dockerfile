@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.10
+FROM python:3.10-alpine
 
 # Set the working directory in the container
 WORKDIR /code
@@ -11,7 +11,11 @@ ENV PATH="/venv/bin:$PATH"
 # Upgrade pip and install any needed packages specified in requirements.txt
 # Copy requirements.txt first to leverage Docker cache
 COPY requirements.txt /code/
-RUN pip install --upgrade pip && pip install --no-cache-dir  -r requirements.txt
+
+# Upgrade pip separately
+RUN pip install --upgrade pip
+# Install requirements
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the current directory contents into the container at /code
 COPY . /code/
