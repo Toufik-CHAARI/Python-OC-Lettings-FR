@@ -1,20 +1,15 @@
-# .circleci/config.yml
-
 version: 2.1
 
 commands:
-  setup_docker_environment:
-    description: "Setup Docker Environment"
+  setup_remote_docker_with_caching:
+    description: "Setup Docker environment with caching"
     steps:
-      - run:
-          name: Install Docker client
-          command: |
-            sudo apt-get update
-            sudo apt-get install docker-ce docker-ce-cli containerd.io
-
       - setup_remote_docker:
           docker_layer_caching: true
 
+  build_and_push_docker_image:
+    description: "Build and push Docker image to DockerHub"
+    steps:
       - run:
           name: Build and Push Docker Image
           command: |
@@ -25,34 +20,25 @@ commands:
 jobs:
   build-and-test:
     docker:
-      # Specify the Docker image to use. Adjust the version as needed.
       - image: circleci/python:3.10
     working_directory: ~/repo
     steps:
       - checkout
-
-      # Setup a virtual environment
       - run:
           name: Setup virtualenv
           command: |
             python3 -m venv venv
             . venv/bin/activate
-
-      # Install dependencies
       - run:
           name: Install dependencies
           command: |
             . venv/bin/activate
             pip install -r requirements.txt
-
-      # Run linter
       - run:
           name: Run flake8 linter
           command: |
             . venv/bin/activate
             flake8 .
-
-      # Run tests with coverage
       - run:
           name: Run pytest with coverage
           command: |
@@ -65,15 +51,9 @@ jobs:
     resource_class: xlarge
     steps:
       - checkout
-      - setup_remote_docker:   
-          version: 20.10.6   
-          docker_layer_caching: true   
-      - run:
-          name: Build and Push Docker Image
-          command: |
-            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker build -t $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1} .
-            docker push $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1}
+      - setup_remote_docker_with_caching
+      - build_and_push_docker_image
+
   deploy-to-heroku:
     docker:
       - image: cimg/base:stable
@@ -101,22 +81,20 @@ jobs:
           command: |
             heroku container:release web --app $HEROKU_APP_NAME
 
-
-
 workflows:
   version: 2
   build-deploy:
     jobs:
-      - build-and-test          
+      - build-and-test
       - build-and-push-docker:
           requires:
             - build-and-test
           filters:
             branches:
-              only: master  # Only run on master branch
+              only: master
       - deploy-to-heroku:
           requires:
             - build-and-push-docker
           filters:
             branches:
-              only: master  # Only run on master branch
+              only: master
