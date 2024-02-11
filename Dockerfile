@@ -8,7 +8,7 @@ WORKDIR /code
 # Copy requirements.txt first to leverage Docker cache
 COPY requirements.txt /code/
 # Upgrade pip
-RUN pip install --upgrade pip
+#RUN pip install --upgrade pip
 # Install packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
