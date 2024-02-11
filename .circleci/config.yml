@@ -93,13 +93,13 @@ jobs:
 
       - run:
           name: Verify Docker Images Before Tagging
-            command: |
-              echo "Listing Docker images..."
-              docker images
-              echo "Verifying environment variables..."
-              echo "DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME"
-              echo "CIRCLE_SHA1: $CIRCLE_SHA1"
-              echo "HEROKU_APP_NAME: $HEROKU_APP_NAME"
+          command: |
+            echo "Listing Docker images..."
+            docker images
+            echo "Verifying environment variables..."
+            echo "DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME"
+            echo "CIRCLE_SHA1: $CIRCLE_SHA1"
+            echo "HEROKU_APP_NAME: $HEROKU_APP_NAME"
       - run:
           name: Tag and Push Docker Image to Heroku Container Registry
           command: |
