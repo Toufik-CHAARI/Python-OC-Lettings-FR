@@ -73,6 +73,12 @@ jobs:
           command: |
             echo "$HEROKU_API_KEY" | docker login --username=_ --password-stdin registry.heroku.com
       - run:
+          name: Debug Docker Push
+          command: |
+            docker images
+            echo "Attempting to push image..."
+      
+      - run:
           name: Push Docker Image to Heroku Container Registry
           command: |
             docker build -t $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1} .
