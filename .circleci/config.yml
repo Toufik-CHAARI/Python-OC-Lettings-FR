@@ -62,7 +62,7 @@ jobs:
   build-and-push-docker:
     docker:
       - image: cimg/base:stable
-    resource_class: large
+    resource_class: xlarge
     steps:
       - checkout
       - setup_remote_docker:   
