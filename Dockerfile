@@ -11,7 +11,7 @@ ENV PATH="/venv/bin:$PATH"
 # Upgrade pip and install any needed packages specified in requirements.txt
 # Copy requirements.txt first to leverage Docker cache
 COPY requirements.txt /code/
-RUN pip install --upgrade pip && pip install --no-cache-dir --max-concurrent-downloads 10 -r requirements.txt
+RUN pip install --upgrade pip && pip install --no-cache-dir  -r requirements.txt
 
 # Copy the current directory contents into the container at /code
 COPY . /code/
