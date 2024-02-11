@@ -10,7 +10,7 @@ COPY requirements.txt /code/
 # Upgrade pip
 #RUN pip install --upgrade pip
 # Install packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --max-concurrent-downloads 10 -r requirements.txt
 
 
 
