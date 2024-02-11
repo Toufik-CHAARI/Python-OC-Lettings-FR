@@ -9,7 +9,7 @@ COMMIT_HASH="latest"  # Use "latest" or specify a commit hash
 if [ -z "$DOCKERHUB_USERNAME" ]; then
     echo "ERROR: The DOCKERHUB_USERNAME environment variable is not set."
     exit 1
-
+fi
 
 # Pull the Docker image from Docker Hub
 echo "Pulling the Docker image..."
