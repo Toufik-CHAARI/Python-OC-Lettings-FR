@@ -25,6 +25,7 @@ commands:
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker build -t $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1} .
+            echo "Docker image built successfully"
             docker push $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1}
 
 jobs:
