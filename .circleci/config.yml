@@ -7,6 +7,16 @@ commands:
       - setup_remote_docker:
           docker_layer_caching: true
 
+  clean_up_docker_environment:
+    description: "Clean up Docker environment before build"
+    steps:
+      - run:
+          name: Clean Up Docker Environment
+          command: |
+            echo "Cleaning up Docker images..."
+            docker system prune -af
+            echo "Docker environment cleaned up."
+
   build_and_push_docker_image:
     description: "Build and push Docker image to DockerHub"
     steps:
@@ -52,6 +62,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker_with_caching
+      - clean_up_docker_environment  # Added cleanup step
       - build_and_push_docker_image
 
   deploy-to-heroku:
@@ -60,37 +71,30 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker_with_caching
-
       - run:
           name: Install Heroku CLI
           command: |
             curl https://cli-assets.heroku.com/install.sh | sh
-
       - run:
           name: Docker Hub Logout (Optional)
           command: docker logout
-
       - run:
           name: Docker Hub Login
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-
       - run:
           name: Heroku Login
           command: |
             echo "$HEROKU_API_KEY" | heroku auth:token
-
       - run:
           name: Login to Heroku Container Registry
           command: |
             echo "$HEROKU_API_KEY" | docker login --username=_ --password-stdin registry.heroku.com
-
       - run:
           name: Debug Docker Push
           command: |
             docker images
             echo "Attempting to push image..."
-
       - run:
           name: Verify Docker Images Before Tagging
           command: |
@@ -106,12 +110,10 @@ jobs:
             docker tag $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1} registry.heroku.com/$HEROKU_APP_NAME/web
             echo "Pushing image to Heroku..."
             docker push registry.heroku.com/$HEROKU_APP_NAME/web
-
       - run:
           name: Release the Image
           command: |
             heroku container:release web --app $HEROKU_APP_NAME
-
 
 workflows:
   version: 2
