@@ -125,8 +125,8 @@ jobs:
             echo "CIRCLE_SHA1: $CIRCLE_SHA1"
             echo "HEROKU_APP_NAME: $HEROKU_APP_NAME"
       - run:
-        name: Pull Docker Image from DockerHub
-        command: docker pull $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1}
+          name: Pull Docker Image from DockerHub
+          command: docker pull $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1}
       - run:
           name: Tag and Push Docker Image to Heroku Container Registry
           command: |
