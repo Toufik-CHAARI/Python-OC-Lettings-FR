@@ -64,7 +64,27 @@ jobs:
       - checkout
       - setup_remote_docker_with_caching
       - clean_up_docker_environment  # Added cleanup step
-      - build_and_push_docker_image
+      - run:
+        name: Build and Verify Docker Image
+        command: |
+          echo "Starting Docker image build..."
+          docker build -t $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1} .
+          echo "Build completed. Listing Docker images..."
+          docker images
+          echo "Verifying environment variables..."
+          echo "DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME"
+          echo "CIRCLE_SHA1: $CIRCLE_SHA1"
+          echo "HEROKU_APP_NAME: $HEROKU_APP_NAME"
+    - run:
+        name: Docker Hub Login
+        command: |
+          echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+    - run:
+        name: Push Docker Image to DockerHub
+        command: |
+          echo "Pushing image to DockerHub..."
+          docker push $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1}
+
 
   deploy-to-heroku:
     docker:
