@@ -122,7 +122,7 @@ jobs:
       - run:
           name: Tag and Push Docker Image to Heroku Container Registry
           command: |
-            docker tag $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1} registry.heroku.com/$HEROKU_APP_NAME/web
+            docker tag $DOCKERHUB_USERNAME/oc_lettings_site:latest registry.heroku.com/$HEROKU_APP_NAME/web
             echo "Pushing image to Heroku..."
             docker push registry.heroku.com/$HEROKU_APP_NAME/web
       - run:
