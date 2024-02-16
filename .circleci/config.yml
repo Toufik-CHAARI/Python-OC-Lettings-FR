@@ -17,16 +17,7 @@ commands:
             docker system prune -af
             echo "Docker environment cleaned up."
 
-  build_and_push_docker_image:
-    description: "Build and push Docker image to DockerHub"
-    steps:
-      - run:
-          name: Build and Push Docker Image
-          command: |
-            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker build -t $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1} .
-            echo "Docker image built successfully"
-            docker push $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1}
+  
 
 jobs:
   build-and-test:
@@ -68,7 +59,7 @@ jobs:
           name: Build and Verify Docker Image
           command: |
             echo "Starting Docker image build..."
-            docker build -t $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1} .
+            docker build -t $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1} -t $DOCKERHUB_USERNAME/oc_lettings_site:latest .
             echo "Build completed. Listing Docker images..."
             docker images
             echo "Verifying environment variables..."
@@ -84,6 +75,7 @@ jobs:
           command: |
             echo "Pushing image to DockerHub..."
             docker push $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1}
+            docker push $DOCKERHUB_USERNAME/oc_lettings_site:latest
 
   deploy-to-heroku:
     docker:
@@ -126,7 +118,7 @@ jobs:
             echo "HEROKU_APP_NAME: $HEROKU_APP_NAME"
       - run:
           name: Pull Docker Image from DockerHub
-          command: docker pull $DOCKERHUB_USERNAME/oc_lettings_site:${CIRCLE_SHA1}
+          command: docker pull $DOCKERHUB_USERNAME/oc_lettings_site:latest
       - run:
           name: Tag and Push Docker Image to Heroku Container Registry
           command: |
