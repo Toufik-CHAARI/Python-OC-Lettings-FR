@@ -75,3 +75,30 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+
+### Deploiement
+
+Prérequis
+
+-l'application docker desktop
+-un compte Docker Hub
+-Un compte circle CI
+-Un compte Github
+-Un compte Heroku
+
+Afin de deployer l'application il est necessaire d'enregistrer
+les variables d'environement suivantes dans circleci:
+
+DOCKERHUB_PASS = votre mot de passe docker
+DOCKERHUB_USERNAME =  votre nom d'utilisateur
+HEROKU_API_KEY = votre token Heroku
+HEROKU_APP_NAME = le nom de votre app sur Heroku
+
+Pour le lancement de l'application localement il faut
+- activer votre environment virtuel
+- saisir les commandes suivantes:
+'export DOCKERHUB_USERNAME= votre nom d'utilisateur dockerhub'
+'chmod +x run_docker.sh'
+
+ Pour lancer la derniere image localement, saisir la commande suivante:
+ './run_docker.sh'
