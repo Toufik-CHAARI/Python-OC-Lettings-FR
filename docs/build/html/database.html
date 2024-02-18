@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Python Module Index &mdash; oc_lettings_site 0.1 documentation</title>
+  <title>Database Structure and Data Models &mdash; oc_lettings_site 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -20,9 +21,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
- 
-
-
+    <link rel="next" title="User Guide" href="userguide.html" />
+    <link rel="prev" title="Technologies and Programming Languages" href="technologies.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,11 +45,15 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Project Installation Instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technologies.html">Technologies and Programming Languages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="database.html">Database Structure and Data Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Database Structure and Data Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#letting-model">Letting Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#profile-model">Profile Model</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="userguide.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appdeployment.html">Application Deployment and Management Procedures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="profiles.html">Profiles App</a></li>
@@ -70,8 +74,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Python Module Index</li>
+      <li class="breadcrumb-item active">Database Structure and Data Models</li>
       <li class="wy-breadcrumbs-aside">
+            <a href="_sources/database.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -79,59 +84,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-
-   <h1>Python Module Index</h1>
-
-   <div class="modindex-jumpbox">
-   <a href="#cap-l"><strong>l</strong></a> | 
-   <a href="#cap-p"><strong>p</strong></a>
-   </div>
-
-   <table class="indextable modindextable">
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-l"><td></td><td>
-       <strong>l</strong></td><td></td></tr>
-     <tr>
-       <td><img src="_static/minus.png" class="toggler"
-              id="toggle-1" style="display: none" alt="-" /></td>
-       <td>
-       <code class="xref">lettings</code></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="lettings.html#module-lettings.models"><code class="xref">lettings.models</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="lettings.html#module-lettings.views"><code class="xref">lettings.views</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-p"><td></td><td>
-       <strong>p</strong></td><td></td></tr>
-     <tr>
-       <td><img src="_static/minus.png" class="toggler"
-              id="toggle-2" style="display: none" alt="-" /></td>
-       <td>
-       <code class="xref">profiles</code></td><td>
-       <em></em></td></tr>
-     <tr class="cg-2">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="profiles.html#module-profiles.models"><code class="xref">profiles.models</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-2">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="profiles.html#module-profiles.views"><code class="xref">profiles.views</code></a></td><td>
-       <em></em></td></tr>
-   </table>
+  <section id="database-structure-and-data-models">
+<h1>Database Structure and Data Models<a class="headerlink" href="#database-structure-and-data-models" title="Link to this heading"></a></h1>
+<p>This section outlines the database configuration and the structure of the data models used in the project. The project employs SQLite for development purposes due to its simplicity and ease of setup. The database schema includes two primary models: <cite>Letting</cite> and <cite>Profile</cite>.</p>
+<section id="letting-model">
+<h2>Letting Model<a class="headerlink" href="#letting-model" title="Link to this heading"></a></h2>
+<p>The <cite>Letting</cite> model is designed to represent rental advertisements. Each letting has the following fields:</p>
+<ul class="simple">
+<li><p><strong>Name</strong>: A descriptive title for the rental listing.</p></li>
+<li><p><strong>Address</strong>: The physical address of the rental property.</p></li>
+</ul>
+<p>This model allows the application to store and manage information about various rental listings available to users.</p>
+</section>
+<section id="profile-model">
+<h2>Profile Model<a class="headerlink" href="#profile-model" title="Link to this heading"></a></h2>
+<p>The <cite>Profile</cite> model represents the users of the application. It includes fields for:</p>
+<ul class="simple">
+<li><p><strong>Username</strong>: The user’s chosen username.</p></li>
+<li><p><strong>User</strong>: A link to Django’s default user model, facilitating access to built-in user functionalities like authentication and permissions.</p></li>
+</ul>
+<p>By utilizing these models, the application effectively organizes and manages data related to rentals and users, facilitating efficient information retrieval and manipulation.</p>
+</section>
+</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="technologies.html" class="btn btn-neutral float-left" title="Technologies and Programming Languages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="userguide.html" class="btn btn-neutral float-right" title="User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

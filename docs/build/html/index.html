@@ -21,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Profiles App" href="profiles.html" /> 
+    <link rel="next" title="Project Installation Instructions" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,6 +45,12 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Project Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technologies.html">Technologies and Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Structure and Data Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userguide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appdeployment.html">Application Deployment and Management Procedures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="profiles.html">Profiles App</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lettings.html">Lettings App</a></li>
 </ul>
@@ -75,9 +81,58 @@
              
   <section id="welcome-to-oc-lettings-site-s-documentation">
 <h1>Welcome to oc_lettings_site’s documentation!<a class="headerlink" href="#welcome-to-oc-lettings-site-s-documentation" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This documentation provides a guide to this Django project, designed to manage lettings and user profiles efficiently.
+Aimed at developers, administrators, and users, it serves as a resource for understanding the project’s functionality, structure,
+and deployment process.</p>
+</section>
+<section id="project-purpose">
+<h2>Project Purpose<a class="headerlink" href="#project-purpose" title="Link to this heading"></a></h2>
+<p>This Django-based project is a platform for managing lettings and user profiles. It allows users to view rental listings and consult profiles.
+The project aims to simplify the management of properties and users for an administrator or a real estate agency.</p>
+</section>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Lettings Management</strong>: Administrators can add, edit, and delete rental listings through a user-friendly interface.</p></li>
+<li><p><strong>Profile Management</strong>: Administrators can add, edit, and delete User profiles.</p></li>
+<li><p><strong>Intuitive Navigation</strong>: The site offers easy navigation for viewing lettings and profiles.</p></li>
+</ul>
+</section>
+<section id="technologies">
+<h2>Technologies<a class="headerlink" href="#technologies" title="Link to this heading"></a></h2>
+<p>This project is built using Django, leveraging its features for rapid development, security,
+and scalability. The frontend utilizes HTML, CSS, and JavaScript to create an interactive and responsive design.</p>
+</section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<p>This documentation outlines everything you need to get started, from setting up your development environment to deploying the application.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Project Installation Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#access-the-admin-interface">Access the Admin Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#view-lettings-and-profiles">View Lettings and Profiles</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="technologies.html">Technologies and Programming Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Structure and Data Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html#letting-model">Letting Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#profile-model">Profile Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="userguide.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="userguide.html#administrators">Administrators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="userguide.html#visitors">Visitors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="appdeployment.html">Application Deployment and Management Procedures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appdeployment.html#setting-environment-variables"><strong>Setting Environment Variables</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="appdeployment.html#monitoring-and-alerting"><strong>Monitoring and Alerting</strong></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="profiles.html">Profiles App</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="profiles.html#profiles.models.Profile"><code class="docutils literal notranslate"><span class="pre">Profile</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiles.html#profiles.views.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
@@ -94,6 +149,7 @@
 </ul>
 </div>
 </section>
+</section>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
 <ul class="simple">
@@ -107,7 +163,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="profiles.html" class="btn btn-neutral float-right" title="Profiles App" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Project Installation Instructions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
