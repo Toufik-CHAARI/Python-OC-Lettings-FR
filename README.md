@@ -78,27 +78,32 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 ### Deploiement
 
-Prérequis
+#### Prérequis
 
--l'application docker desktop
--un compte Docker Hub
--Un compte circle CI
--Un compte Github
--Un compte Heroku
+- L'application docker desktop
+- Un compte Docker Hub
+- Une image docker locale créée et poussée vers Docker Hub 
+- Un compte circle CI
+- Un compte Github
+- Un compte Heroku
 
 Afin de deployer l'application il est necessaire d'enregistrer
 les variables d'environement suivantes dans circleci:
 
-DOCKERHUB_PASS = votre mot de passe docker
-DOCKERHUB_USERNAME =  votre nom d'utilisateur
-HEROKU_API_KEY = votre token Heroku
-HEROKU_APP_NAME = le nom de votre app sur Heroku
+- DOCKERHUB_PASS = votre mot de passe docker
+- DOCKERHUB_USERNAME =  votre nom d'utilisateur
+- HEROKU_API_KEY = votre token Heroku
+- HEROKU_APP_NAME = le nom de votre app sur Heroku
 
-Pour le lancement de l'application localement il faut
-- activer votre environment virtuel
-- saisir les commandes suivantes:
+
+
+Pour extraire la dernière image Docker Hub et lancer l'application localement il faut :
+
+- Activer votre environment virtuel
+- Enregistrer votre nom d'utilisateur DOCKER en tant que variable d'environement via la commande suivante:
 'export DOCKERHUB_USERNAME= votre nom d'utilisateur dockerhub'
+- Rendre le script permettant l'extraction et la gestion de l'application executable via la commande suivante :
 'chmod +x run_docker.sh'
 
- Pour lancer la derniere image localement, saisir la commande suivante:
+ Pour extraire et lancer la derniere image localement, saisir la commande suivante:
  './run_docker.sh'
