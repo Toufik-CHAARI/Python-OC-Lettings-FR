@@ -3,21 +3,32 @@ Application Deployment and Management Procedures
 
 Deployment of this Django application can be performed on cloud platforms such as Heroku or AWS.
 The application uses Gunicorn as the WSGI server for serving the application and Whitenoise for serving static files.
+A CI/CD pipeline has been implemented via CircleCi and the conteneurization is performed via Docker Hub & Docker Desktop.
+The Pipeline is made of three steps:
+
+1. Testing and Linting
+2. Build and push Docker Image
+3. Deployment to heroku
+
+Please note that any change applied to a given branch triggers only the first job (testing & linting).
+The full workflow from testing to deployment is only triggered to changes applied to the master branch
+providing that not error has been raised.
 
 **Setting Environment Variables**
 ---------------------------------
 
 Ensure the necessary environment variables are set in CircleCi before deployment. These include:
 
-- ``DOCKERHUB_PASS``: Your Docker Hub password.
-- ``DOCKERHUB_USERNAME``: Your Docker Hub password username.
+- ``SSH Keys``: The private Key linked to public key in Github.
+- ``DOCKERHUB_USERNAME``: Your Docker Hub username.
+- ``DOCKERHUB_PASS``: Your Docker Hub password .
 - ``HEROKU_API_KEY``: Your Heroku auth:Token.
 - ``HEROKU_APP_NAME``: Your Heroku app name.
 
 **Monitoring and Alerting**
 ---------------------------
 
-It is crucial to set up a monitoring and alerting system for the application in production. Tools like Sentry are recommended for tracking and alerting on errors. This ensures that any issues can be promptly identified and resolved, maintaining the stability and reliability of the application.
-
+It is crucial to set up a monitoring and alerting system for applications in production.
+Tools like Sentry recommended for tracking and alerting on errors must be implemented.
+This ensures that any issues can be promptly identified and resolved, maintaining the stability and reliability of the application.
 By following these guidelines, you can deploy and manage your application effectively, ensuring a smooth operation in a production environment.
-

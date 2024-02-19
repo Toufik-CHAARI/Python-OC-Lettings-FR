@@ -87,21 +87,34 @@
   <section id="application-deployment-and-management-procedures">
 <h1>Application Deployment and Management Procedures<a class="headerlink" href="#application-deployment-and-management-procedures" title="Link to this heading"></a></h1>
 <p>Deployment of this Django application can be performed on cloud platforms such as Heroku or AWS.
-The application uses Gunicorn as the WSGI server for serving the application and Whitenoise for serving static files.</p>
+The application uses Gunicorn as the WSGI server for serving the application and Whitenoise for serving static files.
+A CI/CD pipeline has been implemented via CircleCi and the conteneurization is perferformed via Docker Hub &amp; Docker Desktop.
+The Pipeline is made of three steps:</p>
+<ol class="arabic simple">
+<li><p>Testing and Linting</p></li>
+<li><p>Build and push Docker Image</p></li>
+<li><p>Deployment to heroku</p></li>
+</ol>
+<p>Please note that any change apllied to a given branch triggers only the first job (testing &amp; linting).
+The full workflow from testing to deployment is only triggered to changes applied to the master branch
+providing that not error has been raised.</p>
 <section id="setting-environment-variables">
 <h2><strong>Setting Environment Variables</strong><a class="headerlink" href="#setting-environment-variables" title="Link to this heading"></a></h2>
 <p>Ensure the necessary environment variables are set in CircleCi before deployment. These include:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">DOCKERHUB_PASS</span></code>: Your Docker Hub password.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DOCKERHUB_USERNAME</span></code>: Your Docker Hub password username.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SSH</span> <span class="pre">Keys</span></code>: The private Key linked to public key in Github.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DOCKERHUB_USERNAME</span></code>: Your Docker Hub username.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DOCKERHUB_PASS</span></code>: Your Docker Hub password .</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">HEROKU_API_KEY</span></code>: Your Heroku auth:Token.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">HEROKU_APP_NAME</span></code>: Your Heroku app name.</p></li>
 </ul>
 </section>
 <section id="monitoring-and-alerting">
 <h2><strong>Monitoring and Alerting</strong><a class="headerlink" href="#monitoring-and-alerting" title="Link to this heading"></a></h2>
-<p>It is crucial to set up a monitoring and alerting system for the application in production. Tools like Sentry are recommended for tracking and alerting on errors. This ensures that any issues can be promptly identified and resolved, maintaining the stability and reliability of the application.</p>
-<p>By following these guidelines, you can deploy and manage your application effectively, ensuring a smooth operation in a production environment.</p>
+<p>It is crucial to set up a monitoring and alerting system for applications in production.
+Tools like Sentry recommended for tracking and alerting on errors must be implemented.
+This ensures that any issues can be promptly identified and resolved, maintaining the stability and reliability of the application.
+By following these guidelines, you can deploy and manage your application effectively, ensuring a smooth operation in a production environment.</p>
 </section>
 </section>
 

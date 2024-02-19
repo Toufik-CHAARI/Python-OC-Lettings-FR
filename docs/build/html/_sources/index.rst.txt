@@ -9,7 +9,7 @@ Welcome to oc_lettings_site's documentation!
 Overview
 --------
 
-This documentation provides a guide to this Django project, designed to manage lettings and user profiles efficiently.
+This documentation provides a guide to this Django project designed to manage lettings and user profiles efficiently.
 Aimed at developers, administrators, and users, it serves as a resource for understanding the project's functionality, structure,
 and deployment process.
 
@@ -24,7 +24,7 @@ Key Features
 
 - **Lettings Management**: Administrators can add, edit, and delete rental listings through a user-friendly interface.
 - **Profile Management**: Administrators can add, edit, and delete User profiles.
-- **Intuitive Navigation**: The site offers easy navigation for viewing lettings and profiles.
+- **Intuitive Navigation**: The site offers easy navigation for viewing lettings and profiles to all users.
 
 Technologies
 ------------
