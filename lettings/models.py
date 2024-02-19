@@ -16,6 +16,7 @@ class Address(models.Model):
     Methods:
         __str__: Returns a human-readable string representation of the address.
     """
+
     number = models.PositiveIntegerField(validators=[MaxValueValidator(9999)])
     street = models.CharField(max_length=64)
     city = models.CharField(max_length=64)
@@ -39,6 +40,7 @@ class Letting(models.Model):
     Methods:
         __str__: Returns a human-readable string representation of the letting.
     """
+
     title = models.CharField(max_length=256)
     address = models.OneToOneField(Address, on_delete=models.CASCADE)
 
