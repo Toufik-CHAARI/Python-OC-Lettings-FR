@@ -52,8 +52,10 @@
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database Structure and Data Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="userguide.html">User Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Application Deployment and Management Procedures</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#setting-environment-variables"><strong>Setting Environment Variables</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#monitoring-and-alerting"><strong>Monitoring and Alerting</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-environment-variables">Setting Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#monitoring-and-alerting">Monitoring and Alerting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-the-latest-image-of-the-app-locally">Run the Latest Image of the App Locally</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="profiles.html">Profiles App</a></li>
@@ -86,35 +88,53 @@
              
   <section id="application-deployment-and-management-procedures">
 <h1>Application Deployment and Management Procedures<a class="headerlink" href="#application-deployment-and-management-procedures" title="Link to this heading"></a></h1>
-<p>Deployment of this Django application can be performed on cloud platforms such as Heroku or AWS.
-The application uses Gunicorn as the WSGI server for serving the application and Whitenoise for serving static files.
-A CI/CD pipeline has been implemented via CircleCi and the conteneurization is perferformed via Docker Hub &amp; Docker Desktop.
-The Pipeline is made of three steps:</p>
+<p>Deployment of this Django application can be performed on cloud platforms such as Heroku or AWS. The application uses Gunicorn as the WSGI server for serving the application and Whitenoise for serving static files. A CI/CD pipeline has been implemented via CircleCi, and containerization is performed via Docker Hub &amp; Docker Desktop. The pipeline is composed of three steps:</p>
 <ol class="arabic simple">
 <li><p>Testing and Linting</p></li>
 <li><p>Build and push Docker Image</p></li>
-<li><p>Deployment to heroku</p></li>
+<li><p>Deployment to Heroku</p></li>
 </ol>
-<p>Please note that any change apllied to a given branch triggers only the first job (testing &amp; linting).
-The full workflow from testing to deployment is only triggered to changes applied to the master branch
-providing that not error has been raised.</p>
+<p>Please note that any change applied to a given branch triggers only the first job (testing &amp; linting). The full workflow from testing to deployment is only triggered by changes applied to the master branch, providing that no error has been raised.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Create an Heroku app:</strong> Initialize an application on Heroku.</p></li>
+<li><p><strong>Build a Docker image of the project locally:</strong> Use Docker Desktop to build your application’s Docker image.</p></li>
+<li><p><strong>Push the Docker image to Docker Hub:</strong> Upload your Docker image to your Docker Hub repository.</p></li>
+<li><p><strong>Create a CircleCI project:</strong> Set up your project on CircleCI for continuous integration.</p></li>
+<li><p><strong>Create a Sentry account and update the DSN key in settings.py:</strong> Sign up for Sentry and configure it to monitor your application.</p></li>
+</ul>
+</section>
 <section id="setting-environment-variables">
-<h2><strong>Setting Environment Variables</strong><a class="headerlink" href="#setting-environment-variables" title="Link to this heading"></a></h2>
+<h2>Setting Environment Variables<a class="headerlink" href="#setting-environment-variables" title="Link to this heading"></a></h2>
 <p>Ensure the necessary environment variables are set in CircleCi before deployment. These include:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">SSH</span> <span class="pre">Keys</span></code>: The private Key linked to public key in Github.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DOCKERHUB_USERNAME</span></code>: Your Docker Hub username.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">DOCKERHUB_PASS</span></code>: Your Docker Hub password .</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">HEROKU_API_KEY</span></code>: Your Heroku auth:Token.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">HEROKU_APP_NAME</span></code>: Your Heroku app name.</p></li>
+<li><p><strong>SSH Keys:</strong> set up your public key in your CircleCi and GitHub project.</p></li>
+<li><p><strong>DOCKERHUB_USERNAME:</strong> Your Docker Hub username.</p></li>
+<li><p><strong>DOCKERHUB_PASS:</strong> Your Docker Hub password.</p></li>
+<li><p><strong>HEROKU_API_KEY:</strong> Your Heroku auth token.</p></li>
+<li><p><strong>HEROKU_APP_NAME:</strong> Your Heroku app name.</p></li>
 </ul>
 </section>
 <section id="monitoring-and-alerting">
-<h2><strong>Monitoring and Alerting</strong><a class="headerlink" href="#monitoring-and-alerting" title="Link to this heading"></a></h2>
-<p>It is crucial to set up a monitoring and alerting system for applications in production.
-Tools like Sentry recommended for tracking and alerting on errors must be implemented.
-This ensures that any issues can be promptly identified and resolved, maintaining the stability and reliability of the application.
-By following these guidelines, you can deploy and manage your application effectively, ensuring a smooth operation in a production environment.</p>
+<h2>Monitoring and Alerting<a class="headerlink" href="#monitoring-and-alerting" title="Link to this heading"></a></h2>
+<p>Setting up a monitoring and alerting system for applications in production is crucial. Implement tools like Sentry for tracking and alerting on errors. This ensures that any issues can be promptly identified and resolved, maintaining the stability and reliability of the application.</p>
+</section>
+<section id="run-the-latest-image-of-the-app-locally">
+<h2>Run the Latest Image of the App Locally<a class="headerlink" href="#run-the-latest-image-of-the-app-locally" title="Link to this heading"></a></h2>
+<p>To run the latest image of the application locally:</p>
+<ul>
+<li><p>Navigate to the root project directory.</p></li>
+<li><p>Activate the virtual environment.</p></li>
+<li><p>Execute the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">DOCKERHUB_USERNAME</span><span class="o">=</span>your_docker_username
+chmod<span class="w"> </span>+x<span class="w"> </span>run_docker.sh
+./run_docker.sh
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Follow these guidelines to deploy and manage your application effectively, ensuring smooth operation in a production environment.</p>
 </section>
 </section>
 
