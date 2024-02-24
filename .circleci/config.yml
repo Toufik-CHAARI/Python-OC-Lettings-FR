@@ -50,7 +50,7 @@ jobs:
   build-and-push-docker:
     docker:
       - image: cimg/base:stable
-    resource_class: xlarge
+    resource_class: large
     steps:
       - checkout
       - setup_remote_docker_with_caching
